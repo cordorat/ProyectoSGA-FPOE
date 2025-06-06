@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="5.0"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd">
+    <!--
+     jakarta.faces.PROJECT_STAGE describe dónde se encuentra esta aplicación 
+     en el ciclo de vida desarrollo de software de Jakarta Faces. 
+     Los valores válidos son "Desarrollo", "UnitTest", "SystemTest" o "Producción"
+    -->
+    <context-param>
+        <param-name>jakarta.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+   
+    <!--
+     Los archivos jakarta Faces (.xhtml) deben ser procesados por la plataforma 
+     Jakarta EE antes de ser transferidos al cliente web. Las siguientes 
+     instrucciones:
+       - Especifican la clase encargada de procesar los archivos Jakarta Faces
+       - Especificación de la extensión de los archivos Jakarta Faces
+    --> 
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <!--
+     Especificación de la página inicial de la aplicaci{on
+    -->
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    
+</web-app>

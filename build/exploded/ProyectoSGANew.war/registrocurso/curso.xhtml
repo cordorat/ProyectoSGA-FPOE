@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"  >
+    <h:head>
+        <title>Gestionar Curso</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h:form id="form">
+            <p:messages id ="messages" globalOnly="true" showDetail="false" />
+            <h:panelGrid columns="1">
+                <p:panel header="Asignatura">
+
+
+                    <h:panelGrid columns="16">
+
+                        <p:outputLabel value="Codigo: " />
+                        <p:inputNumber id="codigoAsig" decimalPlaces="0" emptyValue="" required="true" 
+                                       value="#{controladorCurso.asignatura.codigo}"/>
+                        <p:commandButton icon="pi pi-search" process="@this codigoAsig" update="nombreAsig creditos intensidad messages" 
+                                         action="#{controladorCurso.findAsignatura()}"/>
+                        <p:message for="codigoAsig" />
+
+                        <p:outputLabel value="Nombre: " />
+                        <p:inputText id="nombreAsig" readonly="true"  required="true" value="#{controladorCurso.asignatura.nombre}"/>
+                        <p:message for="nombreAsig" />
+
+                        <p:outputLabel value="Creditos: " />
+                        <p:inputNumber id="creditos" readonly="true"  required="true" value="#{controladorCurso.asignatura.creditos}"/>
+                        <p:message for="creditos" />
+
+                        <p:outputLabel value="Intensidad: " />
+                        <p:inputText id="intensidad" readonly="true"  required="true" value="#{controladorCurso.asignatura.intensidad}"/>
+                        <p:message for="intensidad" />
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <p:panel header="Docente">
+
+                    <h:panelGrid columns="12">
+
+                        <p:outputLabel value="NUIP: " />
+                        <p:inputNumber id="nuip" decimalPlaces="0" emptyValue="" required="true" value="#{controladorCurso.docente.nuip}" />
+                        <p:commandButton icon="pi pi-search" process="@this nuip" 
+                                         update="nombreDoc apellidoDoc profesion messages" action="#{controladorCurso.findDocente()}" />                        
+                        <p:message for="nuip" />
+
+                        <p:outputLabel value="Nombre: " />
+                        <p:inputText id="nombreDoc" readonly="true" required="true" value="#{controladorCurso.docente.nombres}" />
+                        <p:message for="nombreDoc" />
+
+                        <p:outputLabel value="Apellidos: " />
+                        <p:inputText id="apellidoDoc" readonly="true" required="true" value="#{controladorCurso.docente.apellidos}"/>
+                        <p:message for="apellidoDoc" />
+
+                        <p:outputLabel value="Profesion: " />
+                        <p:inputText id="profesion" readonly="true" required="true" value="#{controladorCurso.docente.profesion}"/>
+                        <p:message for="profesion" />
+
+                    </h:panelGrid>
+
+                </p:panel>
+
+                <p:panel header="Programa">
+
+                    <h:panelGrid columns="12">
+
+                        <p:outputLabel value="Programa: " for="programa" />
+                        <p:selectOneMenu id="programa" editable="false" required ="true"
+                                         value="#{controladorCurso.cupo.programa}"
+                                         converter="selectOneConverter">
+                            <f:selectItem itemLabel="Seleccione el programa" itemValue="#{null}"/>
+                            <f:selectItems value="#{controladorCurso.programas}" var="item"
+                                           itemLabel="#{item.toString()}"/>
+                        </p:selectOneMenu>
+                        <p:message for="programa"/>
+
+                        <p:spacer width="30"/>
+
+                        <p:outputLabel value="Cupo: " for="cupo" />
+                        <p:inputNumber id="cupo" decimalPlaces="0" emptyValue="" readonly="false" required="true" value="#{controladorCurso.cupo.cantidad}"/>
+                        <p:message for="cupo"/>                                            
+                        <p:commandButton icon="pi pi-plus-circle" process="@this cupo programa" update="cup total messages" 
+                                         action="#{controladorCurso.addProgramaAcademico()}"/>
+
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel header="Horario">
+
+                    <h:panelGrid columns="10">
+
+                        <p:outputLabel value="Dia: " />
+                        <p:selectOneMenu id="dia" required ="true"
+                                         value="#{controladorCurso.horario.diaSemana}"
+                                         converter="selectOneConverter">
+                            <f:selectItem itemLabel="Seleccione el dia" itemValue="#{null}"/>
+                            <f:selectItems value="#{controladorCurso.dias}" var="item"
+                                           itemLabel="#{item.toString()}"/>
+                        </p:selectOneMenu>
+                        <p:message for="dia" />
+
+                        <p:outputLabel value="Hora inicio: " />
+                        <p:inputMask id="horai" value="#{controladorCurso.horario.localTimeI}" mask="99:99" required ="true" converter="localTimeConverter"/>                        
+                        <p:message for="horai" />
+
+                        <p:outputLabel value="Hora fin: " />
+                        <p:inputMask id="horaf" value="#{controladorCurso.horario.localTimeF}" mask="99:99" required ="true" converter="localTimeConverter"/>
+                        <p:message for="horaf" />   
+
+                        <p:commandButton icon="pi pi-plus-circle" process="@this dia horai horaf" update="messages" 
+                                         action="#{controladorCurso.addHorario()}"/>
+                        <p:message for="cupo"/>
+
+                    </h:panelGrid>
+
+                </p:panel>
+ 
+
+                <p:panel header="Cupos por programa academico">
+                    <p:dataTable id="cup" var="cup" value="#{controladorCurso.curso.cupos}">
+                        <p:column headerText="Programa">
+                            #{cup.programa.nombre}
+                        </p:column>
+                        <p:column headerText="Cupos">
+                            #{cup.cantidad}
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel >
+
+
+                <h:panelGrid columns="2">
+                    <p:outputLabel />
+                    <h:panelGrid columns="2">
+
+                        <p:outputLabel value="Total de Cupos" />
+                        <p:inputNumber id="total" value="#{controladorCurso.curso.getTotalCupos()}" disabled="true" required="true" />
+
+                        <p:outputLabel value="Grupo: " />
+                        <p:inputNumber id="grupo" required="true" value="#{controladorCurso.curso.grupo}"/>
+
+                    </h:panelGrid>
+                </h:panelGrid>
+
+            </h:panelGrid>
+
+
+            <h:panelGrid columns="3">
+                <p:commandButton value="Guardar"
+                                 update="@all" process="@form"
+                                 action="#{controladorCurso.registrarCurso()}"/>
+
+
+
+                <p:commandButton value="Programar Nuevo Curso" 
+                                 update="@all" process="@this"
+                                 action="#{controladorCurso.cancel()}"/>
+
+
+
+                <p:commandButton value="Regresar al Inicio" 
+                                 icon="pi pi-home" 
+                                 onclick="window.history.go(-1);return false;" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>

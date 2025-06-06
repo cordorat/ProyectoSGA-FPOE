@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Registro Programas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h:form id="form">
+            <p:card>
+                <f:facet name="title">
+                    Gestionar Programas
+                </f:facet>
+
+                <h:panelGrid columns="6" id="grid">
+
+                    <p:outputLabel value="Codigo: " for="codigo" />
+                    <p:inputNumber id="codigo" decimalPlaces="0" emptyValue="" required="true" value="#{controladorPrograma.programa.codigo}" />
+                    <p:commandButton icon="pi pi-search" process="@this codigo" update="nombre messages" 
+                                         action="#{controladorPrograma.search()}"/>
+                    <p:message for="codigo" />
+
+                    <p:outputLabel value="Nombre: " for="nombre" />
+                    <p:inputText id="nombre" required="true" value="#{controladorPrograma.programa.nombre}" />
+                    <p:message for="nombre" />
+
+                </h:panelGrid>
+
+                <p:messages id ="messages" globalOnly="true" />
+
+                <f:facet name="footer">
+                    <p:commandButton value="Guardar" icon="pi pi-save" 
+                                     action="#{controladorPrograma.save()}"
+                                     update="@all" process="@form"/>
+                    <p:spacer width="2"/>
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     action="#{controladorPrograma.cancel()}"
+                                     update="@form" process="@this"/>
+
+                    <p:spacer width="500"/>
+
+                    <p:commandButton value="Regresar al Inicio" 
+                                     icon="pi pi-home" 
+                                     onclick="window.history.go(-1);return false;" />
+                </f:facet>
+            </p:card>
+        </h:form>
+    </h:body>
+</html>

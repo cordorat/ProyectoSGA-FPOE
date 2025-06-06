@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Supermercado</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <h:panelGrid columns="3" styleClass="top-aligned-columns">
+                <p:panel header="Registrar Asignatura">
+                    <h:panelGrid columns="1">
+                        <p:button outcome="asmin/asignatura.xhtml?faces-redirect=true" value="Gestionar Asignaturas"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:panelGrid> 
+            <h:panelGrid columns="3" styleClass="top-aligned-columns">
+                <p:panel header="Registrar Docente">
+                    <h:panelGrid columns="1">
+                        <p:button outcome="registrodocente/docente.xhtml?faces-redirect=true" value="Gestionar Docentes"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:panelGrid> 
+            <h:panelGrid columns="3" styleClass="top-aligned-columns">
+                <p:panel header="Registrar Curso">
+                    <h:panelGrid columns="1">
+                        <p:button outcome="registrocurso/curso.xhtml?faces-redirect=true" value="Gestionar Curso"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:panelGrid> 
+        </h:form>
+    </h:body>
+</html>

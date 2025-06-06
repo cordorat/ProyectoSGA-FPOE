@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+  <persistence-unit name="ProyectoSGANewPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Asignatura</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Docente</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Cupo</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Curso</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Genero</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Horario</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Periodo</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Persona</class>
+    <class>co.edu.uvpalmira.fpoe.ProyectoSGANew.Programa</class>
+    <class>co.edu.uvpalmira.fpoe.util.LocalDateConverter</class>
+    
+
+    <jta-data-source>jdbc/proyectodb</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

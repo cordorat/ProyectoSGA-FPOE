@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Registro Docente</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <h:form id="form">
+            <p:card>
+                <f:facet name="title">
+                    Registrar Docente
+                </f:facet>
+
+                <h:panelGrid columns="6" id="grid">
+                    
+                    <p:outputLabel value="Profesion :" for="profes" />
+                    <p:inputText id="profes" required="true" value="#{controladorDocente.dct.profesion}" />
+                    <p:message for="profes" />
+                    
+                    <p:outputLabel value="Nombres :" for="name" />
+                    <p:inputText id="name" required="true" value="#{controladorDocente.dct.nombres}" />
+                    <p:message for="name" />
+
+                    <p:outputLabel value="Apellidos :" for="lastname" />
+                    <p:inputText id="lastname" required="true" value="#{controladorDocente.dct.apellidos}" />
+                    <p:message for="lastname" />
+                    
+                    <p:outputLabel value="Documento de Identidad :" for="nuip" />
+                    <p:inputNumber id="nuip" required="true" value="#{controladorDocente.dct.nuip}" />
+                    <p:message for="nuip" />
+                    
+                    <p:outputLabel value="Género: " for="genero" />
+                    <p:selectOneMenu id="genero" value="#{controladorDocente.dct.genero}" required="true">
+                        <f:selectItems value="#{controladorDocente.generos}" var="gen" itemValue="#{gen}" itemLabel="#{gen}"/>
+                    </p:selectOneMenu>
+                    <p:message for="genero"/>
+                    
+                </h:panelGrid>
+
+                <p:messages id ="messages" globalOnly="true" />
+
+                <f:facet name="footer">
+                    <p:commandButton value="Guardar" icon="pi pi-save" 
+                                     action="#{controladorDocente.save()}"
+                                     update="@all" process="@form"/>
+                    <p:spacer width="2"/>
+                    <p:commandButton value="Cancelar" icon="pi pi-times"
+                                     action="#{controladorDocente.cancel()}"
+                                     update="@form" process="@this"/>
+                    <p:spacer width="1000"/>
+              
+                    <p:commandButton value="Regresar" 
+                                     icon="pi pi-home" 
+                                     onclick="window.history.go(-1);return false;" />
+                </f:facet>
+            </p:card>
+        </h:form>
+        
+    </h:body>
+</html>
